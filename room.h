@@ -17,6 +17,8 @@ namespace seppels {
 		std::vector<std::pair<coordinate, gfx> > _graphics;
 		char **_map; 
 
+		int _width, _height;
+
 		public:
 			Room(std::string name);
 	};
