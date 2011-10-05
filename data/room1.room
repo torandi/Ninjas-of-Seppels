@@ -1,0 +1,19 @@
+#####################################
+#												#
+#												#
+#			a									#
+#						0						1
+#												#
+#					b							#
+#												#
+#												#
+################2####################
+
+doors:
+0 room_above gfx:ffee00|# /* stairs */
+1 room23
+2 room_ololo
+
+entities:
+a monster1
+b your_mother

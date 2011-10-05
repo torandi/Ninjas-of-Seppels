@@ -1,0 +1,31 @@
+(allt i parantes är inte en del av formatet)
+#####################################
+#												#
+#												#
+#			a									#
+#						0						1
+#												#
+#					b							#
+#												#
+#												#
+################2####################
+(newline)
+
+doors:
+(
+format:
+{door_id} {room_name} [gfx:{optional_gfx (on format {color RGB}|{char})}] [item:{required_item_to_use}] [locked_msg:{message_when_locked}] [noentry] 
+... (repeat for each door)
+)
+0 room_above gfx:ffee00|# /* stairs */
+1 room23
+2 room_ololo
+(newline)
+
+entities:
+(
+format: 
+{entity_char_in_map} {entity_name (file name)}
+)
+a monster1
+b your_mother
