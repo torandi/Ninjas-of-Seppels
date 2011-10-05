@@ -3,14 +3,15 @@
 
 #include <map>
 #include <string>
+#include "game.h"
 
-namespace {
+namespace seppels {
 	class FileParser {
 
 		static void parse_room(std::string room_file);
-		static std::map<std::string, std::string> parse_file(std::string file);
+		static std::map<std::string, std::string> * parse_file(std::string file);
 	public:
-		static Game parse(std::string world_file);
+		static Game parse(std::string game);
 	};
 }
 #endif

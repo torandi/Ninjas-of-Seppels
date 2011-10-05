@@ -1,6 +1,8 @@
 #ifndef ROOM_H
 #define ROOM_H
 
+#include <vector>
+
 #include "coordinate.h"
 #include "door.h"
 #include "entity.h"

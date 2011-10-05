@@ -1,6 +1,6 @@
 #ifndef GFX_H
 #define GFX_H
-namespace {
+namespace seppels {
 	struct gfx {
 		short color;
 		char c;

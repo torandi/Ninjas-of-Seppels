@@ -14,7 +14,7 @@
 doors:
 (
 format:
-{door_id} {room_name} [gfx:{optional_gfx (on format {color RGB}|{char})}] [item:{required_item_to_use}] [locked_msg:{message_when_locked}] [noentry] 
+{door_id} {room_name} [gfx:{optional_gfx (on format {color RGB}|{char})}] [condition:{required_condition (see condition.format)}] [locked_msg:{message_when_locked}] [noentry] 
 ... (repeat for each door)
 )
 0 room_above gfx:ffee00|# /* stairs */

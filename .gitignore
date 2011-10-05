@@ -1,0 +1,4 @@
+*.o
+*.d
+seppels
+parse_test

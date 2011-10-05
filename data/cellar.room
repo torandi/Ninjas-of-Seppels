@@ -1,3 +1,4 @@
+map:
 #####################################
 #												#
 #												#
@@ -8,12 +9,14 @@
 #												#
 #												#
 ################2####################
-
+;
 doors:
-0 room_above gfx:ffee00|# /* stairs */
-1 room23
+0 room_above gfx:{ffee00,=} /* stairs */
+1 room23 condition:{@your_mother.dead}
 2 room_ololo
+;
 
 entities:
 a monster1
-b your_mother
+b mother @your_mother "Your mother" /* Specifies a global name for the entity and a name for it, order for the two last items are not relevant*/
+;
