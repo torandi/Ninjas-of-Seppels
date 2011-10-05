@@ -3,12 +3,13 @@
 
 #include <vector>
 #include <map>
-#include <pair>
+#include <utility>
 
 #include "coordinate.h"
 #include "door.h"
 #include "entity.h"
 #include "file_parser.h"
+#include "gfx.h"
 
 namespace seppels {
 	class Room {
