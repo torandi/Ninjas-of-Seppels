@@ -3,6 +3,10 @@
 
 #include <ncurses.h>
 #include <iostream>
+#include <list>
+#include <vector>
+#include "gfx.h"
+#include "coordinate.h"
 
 namespace seppels {
 
@@ -10,13 +14,17 @@ namespace seppels {
 
 		private:
 			WINDOW* _mainwnd;
+			WINDOW* _mapwnd;
+			WINDOW* _battlewnd;
 
 		public:
 			Screen();
 			~Screen();			
 			void init();
 
-			void scrolling_text(std::string str[]);
+			void scrolling_text(std::list<std::string>* lines) const;
+			void draw_room(std::vector<std::pair<coordinate, gfx> > graphics) const;
+			
 	};
 
 }

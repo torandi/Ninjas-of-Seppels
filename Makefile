@@ -1,4 +1,4 @@
-OBJS = input.o room.o entity.o door.o game.o file_parser.o #screen.o
+OBJS = input.o room.o entity.o door.o game.o file_parser.o screen.o
 CFLAGS += -Wall -g 
 LDFLAGS += -lncurses
 
