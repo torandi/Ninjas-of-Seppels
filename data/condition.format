@@ -1,3 +1,6 @@
 This is the format of a condition expression:
 
-{$var1, $var2, @monster1.dead}
+{$var1, $var2, @monster1.dead, item2}
+
+This means:
+Global flags var1 and var2 must be true, monster1 must be dead and user must have item2 in inventory
