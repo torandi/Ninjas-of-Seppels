@@ -14,7 +14,7 @@ namespace seppels {
 		
 		std::map<int,Door> _doors;
 		std::map<coordinate, Entity> _entities;
-		std::vector<std::pair<coordinate, gfx> > _grafics;
+		std::vector<std::pair<coordinate, gfx> > _graphics;
 		char **_map; 
 
 		public:
