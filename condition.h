@@ -5,7 +5,7 @@
 
 namespace seppels {
 	enum condition_type_t {
-		COND_VARIABLE,
+		COND_FLAG,
 		COND_ENTITY_FLAG,
 		COND_ITEM_POSSESION
 	};

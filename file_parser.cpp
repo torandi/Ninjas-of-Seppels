@@ -1,4 +1,5 @@
 #include <map>
+#include <utility>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -7,6 +8,7 @@
 
 #include "game.h"
 #include "room.h"
+#include "condition.h"
 
 namespace seppels {
 
@@ -17,8 +19,9 @@ namespace seppels {
 	}
 
 	std::vector<color> FileParser::_color_map;
+	std::vector<std::pair<std::string, std::string> > FileParser::_used_entity_names;
 
-	void FileParser::parse_room(std::string room_file) {
+	void FileParser::parse_room(std::string room_file, Game &game) {
 
 	}
 
@@ -48,7 +51,6 @@ namespace seppels {
 								if(i==0 || line[i-1] != '\\') {
 									//Trim content:
 									//Store variable:
-									std::cout<<"Set "<<cur_var_name<<std::endl;
 									data[cur_var_name] = trim(cur_var_content);
 									cur_var_name = "";
 								}
@@ -77,6 +79,14 @@ namespace seppels {
 		}
 	}
 
+	gfx FileParser::parse_gfx(const std::string &str) {
+		std::string content = str.substr(str.find_first_of('{')+1, str.find_last_of('}')-1);
+		std::string clr_str = trim(content.substr(0,str.find_first_of(',')-1));
+		std::string representation = trim(content.substr(str.find_first_of(',')+1));
+		color clr = color::parse(clr_str);
+		return gfx(get_or_create_color(clr), representation[0]);
+	}
+
 	int FileParser::get_or_create_color(color c) {
 		for(int i=0;i<(int)_color_map.size();++i) {
 			if(_color_map[i] == c) {
@@ -87,22 +97,76 @@ namespace seppels {
 		return _color_map.size()-1;
 	}
 
-	std::vector<condition> FileParser::parse_conditions(std::string cond) {
+	std::vector<condition> FileParser::parse_conditions(std::string str, std::string loc) {
+		std::cout<<"Parsing conditions: "<<str<<std::endl;
 		std::vector<condition> res;
+		std::string content = str.substr(str.find_first_of('{')+1, str.find_last_of('}')-1);
+		int pos=0;
+		unsigned int next;
+		do {
+			next = content.find_first_of(',',pos);
+			unsigned int end_pos = next;
+			if(next != std::string::npos)
+				--end_pos;
+			std::string part = trim(content.substr(pos, end_pos));
+			condition cnd;
+			//Parse condition:
+			switch(part[0]) {
+				case '$':
+					//Global flag
+					cnd.type = COND_FLAG;
+					cnd.name = part.substr(1);
+					break;
+				case '@':
+					cnd.type = COND_ENTITY_FLAG;
+					cnd.name = part.substr(1,part.find_first_of('.')-1);
+					cnd.extra = part.substr(part.find_first_of('.')+1);
+					_used_entity_names.push_back(std::pair<std::string, std::string>(cnd.name, loc));
+					break;
+				case '#':
+					cnd.type = COND_ITEM_POSSESION;
+					cnd.name = part.substr(1);
+					break;
+				default:
+					throw ParseException("Unknown condition in ");//+loc+": "+part);
+			}
+			res.push_back(cnd);
+			pos = next+1;
+		} while( next  != std::string::npos);
 		return res;
 	}
 
-	Game FileParser::parse(std::string world_file) {
+	Game FileParser::parse(std::string game_file) {
 		//Restore color map:
 		_color_map.clear();
-
-		std::map<std::string, std::string> game_data = parse_file(world_file+".game");
-		std::map<std::string, std::string>::iterator it;
-		for(it = game_data.begin(); it!=game_data.end(); ++it) {
+		game_file+=".game";
+		std::map<std::string, std::string> game_data = parse_file(game_file);
+		for(std::map<std::string, std::string>::iterator it = game_data.begin(); it!=game_data.end(); ++it) {
 			std::cout<<it->first<<": "<<it->second<<std::endl;
 		}
 
-		return Game(game_data["intro_text"], game_data["endgame_text"]);
+		Game g = Game(game_data["intro_text"], game_data["endgame_text"]);
+		
+		g._wall_gfx = parse_gfx(game_data["wall_gfx"]);
+		g._victory_conditions = parse_conditions(game_data["victory_conditions"], game_file+":victory_conditions");
+		for(std::vector<condition>::iterator it = g._victory_conditions.begin(); it != g._victory_conditions.end(); ++it) {
+			std::cout<<it->type<<", "<<it->name<<", "<<it->extra<<std::endl;
+		}
+
+		//Verify that all used entity names have been defined:
+		bool has_error=false;
+		for(std::vector<std::pair<std::string, std::string> >::iterator it = _used_entity_names.begin();
+			it != _used_entity_names.end(); ++it) {
+
+			if(g._named_entities.count(it->first)==0) {
+				has_error=true;
+				std::cerr<<"Used but undeclared entity @"<<it->first<<" in "<<it->second<<std::endl;
+			}
+		}
+		if(has_error) {
+			throw ParseException("Undeclared entities");
+		}
+		return g;
 	}
 
 	const char* ParseException::what() const throw() {

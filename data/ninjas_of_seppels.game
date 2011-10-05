@@ -17,4 +17,7 @@ endgame_text: THE END! ;
 start_room: cellar;
 start_quest: quest1; /* Comment */
  
-victory_condition: $victory;
+victory_conditions: {$victory, @monster.foo};
+
+wall_gfx: {00ff00, #};
+/* door_gfx may also be used */
