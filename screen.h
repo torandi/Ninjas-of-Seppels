@@ -2,19 +2,21 @@
 #define SCREEN_H
 
 #include <ncurses.h>
-#include "color.h"
+#include <iostream>
 
 namespace seppels {
 
 	class Screen {
 
+		private:
+			WINDOW* _mainwnd;
+
 		public:
 			Screen();
 			~Screen();			
 			void init();
-			void draw_char(char c, int xpos, int ypos, color p);
-			
 
+			void scrolling_text(std::string str[]);
 	};
 
 }
