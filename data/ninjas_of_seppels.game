@@ -1,0 +1,19 @@
+intro_text:
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+Aliquam eget nulla mi. Quisque sed mauris nisi. Vivamus nec dui ac lorem pretium 
+bibendum eget vehicula turpis. Ut lacus ligula, placerat fringilla egestas at, porta a nibh. 
+Sed diam libero, ultricies nec mattis nec, gravida nec augue. Nullam eu turpis sapien. 
+Suspendisse potenti. Sed urna tortor, pharetra sed facilisis in, elementum hendrerit velit. 
+Phasellus lacinia blandit tempor. Nam tellus neque, laoreet quis dignissim fringilla, feugiat 
+venenatis libero. In hac habitasse platea dictumst. Sed lectus turpis, interdum nec sodales at, 
+malesuada sed tortor. Proin semper viverra lobortis. Aliquam risus dui, interdum tempus adipiscing 
+eleifend, condimentum vitae dui. Donec eget diam nisi, in cursus felis. Vestibulum porta eros at enim bibendum pellentesque. 
+;
+
+endgame_text: THE END! ;
+
+
+start_room: cellar;
+start_quest: quest1; /* Comment */
+ 
+victory_condition: $victory;

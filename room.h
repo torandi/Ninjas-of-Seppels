@@ -10,9 +10,10 @@ namespace seppels {
 	class Room {
 		friend class FileParser;
 		
-		std::map<int,Door> doors;
-		std::map<coordinate, Entity> entities;
-
+		std::map<int,Door> _doors;
+		std::map<coordinate, Entity> _entities;
+		std::vector<std::pair<coordinate, gfx> > _grafics;
+		char **_map; 
 
 		public:
 			Room(std::string name);
