@@ -2,6 +2,8 @@
 #define ROOM_H
 
 #include <vector>
+#include <map>
+#include <pair>
 
 #include "coordinate.h"
 #include "door.h"
@@ -13,9 +15,11 @@ namespace seppels {
 		friend class FileParser;
 		
 		std::map<int,Door> _doors;
-		std::map<coordinate, Entity> _entities;
-		std::vector<std::pair<coordinate, gfx> > _grafics;
+		std::vector<Entity> _dynamic_entities;
+		std::vector<std::pair<coordinate, gfx> > _graphics;
 		char **_map; 
+
+		int _width, _height;
 
 		public:
 			Room(std::string name);
