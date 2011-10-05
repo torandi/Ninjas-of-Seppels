@@ -2,21 +2,24 @@
 #define INPUT_H
 
 #include <ncurses.h>
+#include <map>
 
 namespace seppels {
+
+	typedef char (*callback)(void);
 
 	class Input {
 		
 		private:
-			std::map<char,void (*callback) (char)> _callbacks;
+			std::map<char,callback>* _callbacks;
 		public:
 			Input();
 			~Input();
 
-			void process();
-			void register_callback(void (*callback) (char), char c);
+			void process(char c);
+			void register_callback(callback, char c);
 
-	}
+	};
 
 }
 
