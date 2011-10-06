@@ -43,7 +43,7 @@ namespace seppels {
 		///TODO
 	}
 
-	WINDOW* BattleMenu::draw_Menu()
+	WINDOW* BattleMenu::draw_menu()
 	{
 		///TODO
 	}
