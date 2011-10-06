@@ -2,6 +2,7 @@
 #define ROOM_H
 
 #include <vector>
+#include <list>
 #include <map>
 #include <utility>
 
@@ -17,7 +18,7 @@ namespace seppels {
 		
 		std::map<int,Door> _doors;
 		std::vector<Entity> _dynamic_entities;
-		std::vector<std::pair<coordinate, gfx> > _graphics;
+		std::list<std::pair<coordinate, gfx> > _graphics;
 		char **_map; 
 
 		int _width, _height;

@@ -5,7 +5,7 @@
 #include "entity.h"
 #include "gfx.h"
 
-#include <vector>
+#include <list>
 #include <string>
 #include <map>
 
@@ -16,7 +16,7 @@ namespace seppels {
 	class Game {
 		friend class FileParser;
 		
-		std::vector<condition> _victory_conditions;
+		std::list<condition> _victory_conditions;
 		std::map<std::string, Entity> _named_entities;
 
 		gfx _wall_gfx;

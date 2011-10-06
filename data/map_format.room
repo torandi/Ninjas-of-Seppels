@@ -20,6 +20,8 @@ format:
 0 room_above gfx:ffee00|# /* stairs */
 1 room23
 2 room_ololo
+
+set room_name to _virtual_ do not render and is only used as an entry point
 (newline)
 
 entities:

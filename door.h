@@ -3,12 +3,17 @@
 
 #include <string>
 #include "gfx.h"
+#include "coordinate.h"
+
+class Room; //Forward declaration of Room
 
 namespace seppels {
-
 	class Door {
+		coordinate _pos;
+		gfx _graphic;
+		Room * _target;
 		public:
-			Door(std::string target, gfx look, bool allow_entry=true); //Add open conditions 
+			void render();
 	};
 }
 #endif

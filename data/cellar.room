@@ -1,20 +1,22 @@
 map:
 #####################################
-#												#
-#												#
-#			a									#
-#						0						1
-#												#
-#					b							#
-#												#
-#												#
+#                                   #
+#                                   #
+#        a                          #
+#                 0                 1
+#  4                                #
+#             b                     #
+#                                   #
+#                                   #
 ################2####################
 ;
-doors:
-0 room_above gfx:{ffee00,=} /* stairs */
-1 room23 condition:{@your_mother.defeated}
-2 room_ololo
-;
+doors:{
+{0,room_above,gfx:{ffee00,=}} /* stairs */,
+{1,room23,condition:{@your_mother.defeated}},
+{2,room_ololo},
+{4,_virtual_}
+}
+;]
 
 entities:
 a monster1
